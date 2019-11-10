@@ -7,6 +7,7 @@ public class SoyBoyController : MonoBehaviour
 {
     public float speed = 14f;
     public float accel = 6f;
+    public float airAccel = 3f;
     private Vector2 input;
     private SpriteRenderer sr;
     private Rigidbody2D rb;
@@ -118,11 +119,20 @@ public class SoyBoyController : MonoBehaviour
 
     void FixedUpdate()
     {
-         // 1
-        var acceleration = accel;
+        // 1
+        var acceleration = 0f;
+        if (PlayerIsOnGround())
+        {
+            acceleration = accel;
+        }
+        else
+        {
+            acceleration = airAccel;
+        }
+
         var xVelocity = 0f;
         // 2
-        if (input.x == 0)
+        if (PlayerIsOnGround() && input.x == 0)
         {
             xVelocity = 0f;
         }
@@ -131,7 +141,7 @@ public class SoyBoyController : MonoBehaviour
             xVelocity = rb.velocity.x;
         }
         // 3
-        rb.AddForce(new Vector2(((input.x * speed) - rb.velocity.x)* acceleration, 0));
+        rb.AddForce(new Vector2(((input.x * speed) - rb.velocity.x)* acceleration,0));
         // 4
         rb.velocity = new Vector2(xVelocity, rb.velocity.y);
 
