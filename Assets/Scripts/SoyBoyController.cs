@@ -54,27 +54,27 @@ public class SoyBoyController : MonoBehaviour
                                 -Vector2.up, 
                                 rayCastLengthCheck
                             );
-        //Debug.DrawRay(new Vector2(transform.position.x, transform.position.y - height / 2),
-        //                        -Vector2.up * rayCastLengthCheck,
-        //                        Color.red);
+        Debug.DrawRay(new Vector2(transform.position.x, transform.position.y - height / 2),
+                                -Vector2.up * rayCastLengthCheck,
+                                Color.red);
 
         bool groundCheck2 = Physics2D.Raycast(
                                 new Vector2(transform.position.x + (width - 0.2f), transform.position.y - height / 2),
                                 -Vector2.up,
                                 rayCastLengthCheck
                             );
-        //Debug.DrawRay(new Vector2(transform.position.x + (width - 0.2f), transform.position.y - height/2),
-        //                        -Vector2.up * rayCastLengthCheck,
-        //                        Color.red);
+        Debug.DrawRay(new Vector2(transform.position.x + (width - 0.2f), transform.position.y - height/2),
+                                -Vector2.up * rayCastLengthCheck,
+                                Color.red);
 
         bool groundCheck3 = Physics2D.Raycast(
                                 new Vector2(transform.position.x - (width - 0.2f), transform.position.y - height/2), 
                                 -Vector2.up, 
                                 rayCastLengthCheck
                             );    
-        //Debug.DrawRay(new Vector2(transform.position.x - (width - 0.2f), transform.position.y - height/2),
-        //                        -Vector2.up * rayCastLengthCheck,
-        //                        Color.red);
+        Debug.DrawRay(new Vector2(transform.position.x - (width - 0.2f), transform.position.y - height/2),
+                                -Vector2.up * rayCastLengthCheck,
+                                Color.red);
 
         // 2
         if (groundCheck1 || groundCheck2 || groundCheck3)
@@ -87,16 +87,19 @@ public class SoyBoyController : MonoBehaviour
         }
     }
 
+    //this method somply wants to check for any wall on either side
+    //if it detects a wall (on left or right) it returns true
     public bool IsWallToLeftOrRight()
     {
-        // 1
+        // check for wall on left
         bool wallOnleft = Physics2D.Raycast(new Vector2(transform.position.x - width, transform.position.y),
-                                            -Vector2.right, 
+                                            -Vector2.right,
                                             rayCastLengthCheck);
+
         Debug.DrawRay(new Vector2(transform.position.x - width, transform.position.y),
                                             -Vector2.right * rayCastLengthCheck,
                                             Color.red);
-
+        //check for wall on the right
         bool wallOnRight = Physics2D.Raycast(new Vector2(transform.position.x + width, transform.position.y),
                                             Vector2.right, 
                                             rayCastLengthCheck);
@@ -105,7 +108,7 @@ public class SoyBoyController : MonoBehaviour
                                             Vector2.right * rayCastLengthCheck,
                                             Color.red);
 
-        // 2
+        // check for wall on left OR right (either is a success)
         if (wallOnleft || wallOnRight)
         {
             return true;
@@ -128,12 +131,15 @@ public class SoyBoyController : MonoBehaviour
         }
     }
 
+    //this function returns -1 for wall on left, 1 for wall on right, 0 for no walls
     public int GetWallDirection()
     {
+        //send a ray to the left to check for a wall
         bool isWallLeft = Physics2D.Raycast(new Vector2(transform.position.x - width, transform.position.y),
                                             -Vector2.right, 
                                             rayCastLengthCheck);
 
+        //send a ray to the right to check for a wall
         bool isWallRight = Physics2D.Raycast(new Vector2(transform.position.x + width, transform.position.y),
                                              Vector2.right, 
                                              rayCastLengthCheck);
