@@ -2777,6 +2777,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerName: 
+  buttonPrefab: {fileID: 0}
 --- !u!4 &1434018347
 Transform:
   m_ObjectHideFlags: 0
@@ -3173,7 +3174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90791b2e8c5946245babdaefc66eeb60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelName: 
+  levelName: Level 3
 --- !u!1 &1781207473
 GameObject:
   m_ObjectHideFlags: 0
